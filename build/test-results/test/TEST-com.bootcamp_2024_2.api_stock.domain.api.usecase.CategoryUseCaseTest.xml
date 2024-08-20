@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-08-18T22:34:41" hostname="JUANES" time="0.083">
+<testsuite name="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-08-20T13:21:25" hostname="JUANES" time="0.104">
   <properties/>
-  <testcase name="Given a category, it must be inserted into the database." classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.083"/>
+  <testcase name="Given a category, it must be inserted into the database." classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.104"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
