@@ -26,8 +26,10 @@ public class CategoryEntity {
     @Column(name = "category_id")
     private Long id;
 
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
+    @Column(name = "description", nullable = false, length = 90)
     private String description;
 
 }
