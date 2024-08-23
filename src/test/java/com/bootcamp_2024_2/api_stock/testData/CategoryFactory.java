@@ -1,5 +1,6 @@
 package com.bootcamp_2024_2.api_stock.testData;
 
+import com.bootcamp_2024_2.api_stock.adapters.driving.http.dto.response.CategoryResponse;
 import com.bootcamp_2024_2.api_stock.domain.model.Category;
 
 import java.util.ArrayList;
@@ -26,6 +27,10 @@ public class CategoryFactory {
             categories.add(new Category((long)i, getRandomName(), null));
         }
         return categories;
+    }
+
+    public static CategoryResponse toCategoryResponse(Category category) {
+        return new CategoryResponse(category.getId(), category.getName(), category.getDescription());
     }
 
 }

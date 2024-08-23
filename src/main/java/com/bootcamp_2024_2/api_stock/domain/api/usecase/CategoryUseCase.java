@@ -4,6 +4,8 @@ import com.bootcamp_2024_2.api_stock.domain.api.ICategoryServicePort;
 import com.bootcamp_2024_2.api_stock.domain.model.Category;
 import com.bootcamp_2024_2.api_stock.domain.spi.ICategoryPersistencePort;
 
+import java.util.List;
+
 public class CategoryUseCase implements ICategoryServicePort {
 
     private final ICategoryPersistencePort categoryPersistencePort;
@@ -15,5 +17,10 @@ public class CategoryUseCase implements ICategoryServicePort {
     @Override
     public void saveCategory(Category category) {
         categoryPersistencePort.saveCategory(category);
+    }
+
+    @Override
+    public List<Category> getAllCategories(Integer page, Integer size, boolean ascendingOrder) {
+        return categoryPersistencePort.getAllCategories(page, size, ascendingOrder);
     }
 }
