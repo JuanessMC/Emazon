@@ -6,6 +6,11 @@ import com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.repository.ICateg
 import com.bootcamp_2024_2.api_stock.domain.model.Category;
 import com.bootcamp_2024_2.api_stock.domain.spi.ICategoryPersistencePort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 public class CategoryAdapter implements ICategoryPersistencePort {
@@ -19,5 +24,11 @@ public class CategoryAdapter implements ICategoryPersistencePort {
         }
 
         categoryRepository.save(categoryEntityMapper.toEntity(category));
+    }
+
+    @Override
+    public List<Category> getAllCategories(Integer page, Integer size, boolean ascendingOrder) {
+        Pageable pagination = PageRequest.of(page, size, ascendingOrder ? Sort.by("name").ascending() : Sort.by("name").descending());
+        return categoryEntityMapper.toModelList(categoryRepository.findAll(pagination).getContent());
     }
 }
