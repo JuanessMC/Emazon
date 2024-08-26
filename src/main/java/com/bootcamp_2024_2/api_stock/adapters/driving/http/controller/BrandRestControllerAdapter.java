@@ -1,7 +1,6 @@
 package com.bootcamp_2024_2.api_stock.adapters.driving.http.controller;
 
 import com.bootcamp_2024_2.api_stock.adapters.driving.http.dto.request.AddBrandRequest;
-import com.bootcamp_2024_2.api_stock.adapters.driving.http.dto.response.BrandResponse;
 import com.bootcamp_2024_2.api_stock.adapters.driving.http.mapper.IBrandRequestMapper;
 import com.bootcamp_2024_2.api_stock.adapters.driving.http.mapper.IBrandResponseMapper;
 import com.bootcamp_2024_2.api_stock.domain.api.IBrandServicePort;
@@ -9,19 +8,14 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
 
 @Controller
 @RequestMapping("/brand")

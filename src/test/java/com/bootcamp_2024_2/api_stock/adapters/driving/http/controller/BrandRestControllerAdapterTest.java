@@ -1,0 +1,104 @@
+package com.bootcamp_2024_2.api_stock.adapters.driving.http.controller;
+
+import com.bootcamp_2024_2.api_stock.adapters.driving.http.dto.response.BrandResponse;
+import com.bootcamp_2024_2.api_stock.adapters.driving.http.mapper.IBrandRequestMapper;
+import com.bootcamp_2024_2.api_stock.adapters.driving.http.mapper.IBrandResponseMapper;
+import com.bootcamp_2024_2.api_stock.domain.api.IBrandServicePort;
+import com.bootcamp_2024_2.api_stock.domain.model.Brand;
+import com.bootcamp_2024_2.api_stock.testData.BrandFactory;
+import com.bootcamp_2024_2.api_stock.testData.RequestCase;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+@ExtendWith(MockitoExtension.class)
+
+class BrandRestControllerAdapterTest {
+
+    @Mock
+    private IBrandServicePort brandServicePort;
+    @Mock
+    private IBrandRequestMapper brandRequestMapper;
+    @Mock
+    private IBrandResponseMapper brandResponseMapper;
+    @InjectMocks
+    private BrandRestControllerAdapter brandRestControllerAdapter;
+    private MockMvc mockMvc;
+
+    @BeforeEach
+    void setUp() {
+        mockMvc = MockMvcBuilders.standaloneSetup(brandRestControllerAdapter).build();
+    }
+
+    @ParameterizedTest
+    @MethodSource("provideBrandRequests")
+    void testAddBrand(RequestCase testCase) throws Exception {
+        // Given
+        String requestBody = testCase.getRequestBody();
+        HttpStatus expectedStatus = testCase.getExpectedStatus();
+
+        // When & Then
+        MvcResult mvcResult = mockMvc.perform(post("/brand/")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andExpect(status().is(expectedStatus.value()))
+                .andReturn();
+
+        if (expectedStatus == HttpStatus.CREATED) {
+            verify(brandServicePort).saveBrand(any());
+        } else if (expectedStatus == HttpStatus.BAD_REQUEST) {
+            Exception resolvedException = mvcResult.getResolvedException();
+            assertTrue(resolvedException instanceof MethodArgumentNotValidException);
+        }
+    }
+
+    private static Stream<Arguments> provideBrandRequests() {
+        return Stream.of(
+                Arguments.of(generateRequest("{\"name\":\"Nike\",\"description\":\"Sports brand\"}", HttpStatus.CREATED)),
+
+                Arguments.of(generateRequest("{\"name\":\"\",\"description\":\"Sports brand\"}", HttpStatus.BAD_REQUEST)),
+
+                Arguments.of(generateRequest("{\"name\":\"Nike\",\"description\":\"\"}", HttpStatus.BAD_REQUEST)),
+
+                Arguments.of(generateRequest("{\"name\":\"N\",\"description\":\"N\"}", HttpStatus.BAD_REQUEST)),
+
+                Arguments.of(generateRequest("{\"name\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean.\",\"description\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean.\"}", HttpStatus.BAD_REQUEST)),
+
+                Arguments.of(generateRequest("{\"name\":\"\",\"description\":\"Sports brand\"}", HttpStatus.BAD_REQUEST)),
+
+                Arguments.of(generateRequest("{\"name\":\"Nike\",\"description\":\"\"}", HttpStatus.BAD_REQUEST)),
+
+                Arguments.of(generateRequest("{\"name\":\"N\",\"description\":\"N\"}", HttpStatus.BAD_REQUEST)),
+
+                Arguments.of(generateRequest("{\"name\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean.\",\"description\":\"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean.\"}", HttpStatus.BAD_REQUEST))
+        );
+    }
+
+    private static RequestCase generateRequest(String requestBody, HttpStatus expectedStatus) {
+        return new RequestCase(requestBody, expectedStatus);
+    }
+}

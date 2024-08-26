@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-08-23T19:17:07" hostname="JUANES" time="0.155">
+<testsuite name="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-08-26T03:47:15" hostname="JUANES" time="0.104">
   <properties/>
-  <testcase name="getAllCategories()" classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.133"/>
-  <testcase name="Given a category, it must be inserted into the database." classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.018"/>
+  <testcase name="getAllCategories()" classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.092"/>
+  <testcase name="Given a category, it must be inserted into the database." classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.01"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
