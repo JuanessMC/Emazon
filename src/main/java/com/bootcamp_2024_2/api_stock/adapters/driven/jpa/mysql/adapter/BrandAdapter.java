@@ -6,6 +6,11 @@ import com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.repository.IBrand
 import com.bootcamp_2024_2.api_stock.domain.model.Brand;
 import com.bootcamp_2024_2.api_stock.domain.spi.IBrandPersistencePort;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 public class BrandAdapter implements IBrandPersistencePort {
@@ -19,5 +24,11 @@ public class BrandAdapter implements IBrandPersistencePort {
         }
 
         brandRepository.save(brandEntityMapper.toEntity(brand));
+    }
+
+    @Override
+    public List<Brand> getAllBlands(Integer page, Integer size, boolean ascendingOrder) {
+        Pageable pagination = PageRequest.of(page, size, ascendingOrder ? Sort.by("name").ascending() : Sort.by("name").descending());
+        return brandEntityMapper.toModelList(brandRepository.findAll(pagination).getContent());
     }
 }
