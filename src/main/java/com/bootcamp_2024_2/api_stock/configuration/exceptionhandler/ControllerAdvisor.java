@@ -1,6 +1,6 @@
 package com.bootcamp_2024_2.api_stock.configuration.exceptionhandler;
 
-import com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.exception.ElementAlreadyExistsException;
+import com.bootcamp_2024_2.api_stock.domain.exception.ElementAlreadyExistsException;
 import com.bootcamp_2024_2.api_stock.configuration.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

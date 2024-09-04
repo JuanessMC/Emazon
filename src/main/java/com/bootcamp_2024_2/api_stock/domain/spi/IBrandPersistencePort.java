@@ -6,5 +6,6 @@ import java.util.List;
 
 public interface IBrandPersistencePort {
     void saveBrand(Brand brand);
-    List<Brand> getAllBlands(Integer page, Integer size, boolean ascendingOrder);
+    List<Brand> getAllBrands(Integer page, Integer size, boolean ascendingOrder);
+    boolean existsByName(String name);
 }
