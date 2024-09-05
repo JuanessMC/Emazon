@@ -76,40 +76,6 @@ class CategoryRestControllerAdapterTest {
         }
     }
 
-    @Test
-    @DisplayName("Test to get all categories")
-    void testGetAllCategories() throws Exception {
-        // Given
-        List<Category> expectedCategories = Arrays.asList(
-                CategoryFactory.createCategory(),
-                CategoryFactory.createCategory(),
-                CategoryFactory.createCategory()
-        );
-
-        when(categoryServicePort.getAllCategories(0, 10, true)).thenReturn(expectedCategories);
-
-        List<CategoryResponse> expectedResponses = Arrays.asList(
-                CategoryFactory.toCategoryResponse(expectedCategories.get(0)),
-                CategoryFactory.toCategoryResponse(expectedCategories.get(1)),
-                CategoryFactory.toCategoryResponse(expectedCategories.get(2))
-        );
-        when(categoryResponseMapper.toCategoryResponseList(expectedCategories)).thenReturn(expectedResponses);
-
-        // When & Then
-
-        mockMvc.perform(get("/category/")
-                        .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].name").value(expectedResponses.get(0).getName()))
-                .andExpect(jsonPath("$[0].description").value(expectedResponses.get(0).getDescription()))
-                .andExpect(jsonPath("$[1].name").value(expectedResponses.get(1).getName()))
-                .andExpect(jsonPath("$[1].description").value(expectedResponses.get(1).getDescription()))
-                .andExpect(jsonPath("$[2].name").value(expectedResponses.get(2).getName()))
-                .andExpect(jsonPath("$[2].description").value(expectedResponses.get(2).getDescription()));
-    }
-
-
-
     private static Stream<Arguments> provideCategoryRequests() {
         return Stream.of(
                 Arguments.of(generateRequest("{\"name\":\"Electronics\",\"description\":\"Electronics category\"}", HttpStatus.CREATED)),

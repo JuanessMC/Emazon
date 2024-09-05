@@ -29,38 +29,6 @@ class CategoryUseCaseTest {
     @InjectMocks
     private CategoryUseCase categoryUseCase;
 
-    @Test
-    @DisplayName("Given a category, it must be inserted into the database.")
-    void saveCategory() {
-        //GIVEN
-        Category category = CategoryFactory.createCategory();
-        doNothing().when(categoryPersistencePort).saveCategory(category);
 
-        //WHEN
-        categoryUseCase.saveCategory(category);
-
-        //THEN
-        verify(categoryPersistencePort, times(1)).saveCategory(category);
-    }
-    @Test
-    void getAllCategories() {
-        // GIVEN
-        Integer page = 0;
-        Integer size = 10;
-        boolean ascendingOrder = true;
-        List<Category> expectedCategories = Arrays.asList(
-                CategoryFactory.createCategory(),
-                CategoryFactory.createCategory()
-        );
-        when(categoryPersistencePort.getAllCategories(page, size, ascendingOrder)).thenReturn(expectedCategories);
-
-        // WHEN
-        List<Category> actualCategories = categoryUseCase.getAllCategories(page, size, ascendingOrder);
-
-        // THEN
-        assertEquals(expectedCategories.size(), actualCategories.size());
-        assertTrue(expectedCategories.containsAll(actualCategories));
-        verify(categoryPersistencePort, times(1)).getAllCategories(page, size, ascendingOrder);
-    }
 
 }

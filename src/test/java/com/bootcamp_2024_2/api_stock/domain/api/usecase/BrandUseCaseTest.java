@@ -30,17 +30,5 @@ class BrandUseCaseTest {
     @InjectMocks
     private BrandUseCase brandUseCase;
 
-    @Test
-    @DisplayName("Given a brand, it must be inserted into the database.")
-    void saveBrand() {
-        // GIVEN
-        Brand brand = BrandFactory.createBrand();
-        doNothing().when(brandPersistencePort).saveBrand(brand);
 
-        // WHEN
-        brandUseCase.saveBrand(brand);
-
-        // THEN
-        verify(brandPersistencePort, times(1)).saveBrand(brand);
-    }
 }

@@ -87,3 +87,9 @@ asrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/mapper/IBrand
 asrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/dto/response/BrandResponse.java,7\8\788cdccce19152cea698e1697390689f6ac9fdd3
 ”
 dsrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driven/jpa/mysql/mapper/IBrandEntityMapper.java,d\7\d7c9208f83975f1cf70dd59fc3e8d0dd7078412b
+u
+Esrc/main/java/com/bootcamp_2024_2/api_stock/domain/util/Paginate.java,9\0\90716294795c8adba176cf88d8b51ef49ab4e9ee
+•
+esrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/dto/response/PaginatedResponse.java,a\c\acf7ff868486d6228f821fef0df463954a56838e
+”
+dsrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/mapper/IGenericResponseMapper.java,2\9\29596159cebff79fa4eea6bc5419ac471b02ccae
