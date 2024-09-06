@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-04T19:58:57-0500",
+    date = "2024-09-05T17:15:01-0500",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 @Component
@@ -23,19 +23,13 @@ public class ICategoryResponseMapperImpl implements ICategoryResponseMapper {
             return null;
         }
 
-        List<CategoryResponse> content = null;
-        Integer totalPages = null;
-        Integer currentPage = null;
-        Integer totalItems = null;
-        Integer pageSize = null;
+        PaginatedResponse<CategoryResponse> paginatedResponse = new PaginatedResponse<CategoryResponse>();
 
-        content = toCategoryResponseList( paginatedResult.getContent() );
-        totalPages = paginatedResult.getTotalPages();
-        currentPage = paginatedResult.getCurrentPage();
-        totalItems = paginatedResult.getTotalItems();
-        pageSize = paginatedResult.getPageSize();
-
-        PaginatedResponse<CategoryResponse> paginatedResponse = new PaginatedResponse<CategoryResponse>( totalPages, currentPage, totalItems, pageSize, content );
+        paginatedResponse.setTotalPages( paginatedResult.getTotalPages() );
+        paginatedResponse.setCurrentPage( paginatedResult.getCurrentPage() );
+        paginatedResponse.setTotalItems( paginatedResult.getTotalItems() );
+        paginatedResponse.setPageSize( paginatedResult.getPageSize() );
+        paginatedResponse.setContent( toCategoryResponseList( paginatedResult.getContent() ) );
 
         return paginatedResponse;
     }

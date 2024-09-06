@@ -6,8 +6,6 @@ import com.bootcamp_2024_2.api_stock.domain.model.Brand;
 import com.bootcamp_2024_2.api_stock.domain.spi.IBrandPersistencePort;
 import com.bootcamp_2024_2.api_stock.domain.util.Paginate;
 
-import java.util.List;
-
 public class BrandUseCase implements IBrandServicePort {
 
     private final IBrandPersistencePort brandPersistencePort;

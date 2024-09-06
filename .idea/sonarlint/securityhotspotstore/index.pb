@@ -33,8 +33,6 @@ asrc/main/java/com/bootcamp_2024_2/api_stock/configuration/exceptionhandler/Cont
 osrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/controller/CategoryRestControllerAdapter.java,c\d\cd7144bc4956b889a8b1dd16d849369fa49800fe
 —
 gsrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driven/jpa/mysql/mapper/ICategoryEntityMapper.java,f\1\f179784e0361a4c8290b8520873b877cd46d047f
-¢
-rsrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driven/jpa/mysql/exception/ElementAlreadyExistsException.java,c\2\c2ddc84a8afdfc37f65a6a2014864c88854d63aa
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 ‡
@@ -93,3 +91,5 @@ Esrc/main/java/com/bootcamp_2024_2/api_stock/domain/util/Paginate.java,9\0\9071
 esrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/dto/response/PaginatedResponse.java,a\c\acf7ff868486d6228f821fef0df463954a56838e
 ”
 dsrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/mapper/IGenericResponseMapper.java,2\9\29596159cebff79fa4eea6bc5419ac471b02ccae
+z
+Jsrc/test/java/com/bootcamp_2024_2/api_stock/testData/PaginatedFactory.java,f\8\f8b0e1d6e641e580b59862a79bdeb3f48fcfd7b0

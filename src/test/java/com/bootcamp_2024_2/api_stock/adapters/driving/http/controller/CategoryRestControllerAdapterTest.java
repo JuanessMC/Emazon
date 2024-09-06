@@ -1,10 +1,12 @@
 package com.bootcamp_2024_2.api_stock.adapters.driving.http.controller;
 
 import com.bootcamp_2024_2.api_stock.adapters.driving.http.dto.response.CategoryResponse;
+import com.bootcamp_2024_2.api_stock.adapters.driving.http.dto.response.PaginatedResponse;
 import com.bootcamp_2024_2.api_stock.adapters.driving.http.mapper.ICategoryRequestMapper;
 import com.bootcamp_2024_2.api_stock.adapters.driving.http.mapper.ICategoryResponseMapper;
 import com.bootcamp_2024_2.api_stock.domain.api.ICategoryServicePort;
 import com.bootcamp_2024_2.api_stock.domain.model.Category;
+import com.bootcamp_2024_2.api_stock.domain.util.Paginate;
 import com.bootcamp_2024_2.api_stock.testData.CategoryFactory;
 import com.bootcamp_2024_2.api_stock.testData.RequestCase;
 import org.junit.jupiter.api.BeforeEach;
@@ -52,6 +54,57 @@ class CategoryRestControllerAdapterTest {
     @BeforeEach
     void setUp() {
         mockMvc = MockMvcBuilders.standaloneSetup(categoryRestControllerAdapter).build();
+    }
+
+    @Test
+    void testGetAllCategories() throws Exception {
+        // Given
+        int page = 0;
+        int size = 10;
+        boolean ascendingOrder = true;
+
+        List<Category> categoryList = CategoryFactory.createCategoryList(2);
+
+        Paginate<Category> paginate = new Paginate<>(
+                1,
+                0,
+                2,
+                10,
+                categoryList
+        );
+
+        PaginatedResponse<CategoryResponse> paginatedResponse = new PaginatedResponse<>();
+        paginatedResponse.setContent(categoryList.stream().map(category ->
+                new CategoryResponse(category.getId(), category.getName(), category.getDescription())
+        ).toList());
+        paginatedResponse.setTotalPages(paginate.getTotalPages());
+        paginatedResponse.setCurrentPage(paginate.getCurrentPage());
+        paginatedResponse.setTotalItems(paginate.getTotalItems());
+        paginatedResponse.setPageSize(paginate.getPageSize());
+
+        when(categoryServicePort.getAllCategories(page, size, ascendingOrder)).thenReturn(paginate);
+        when(categoryResponseMapper.toPaginatedResponse(paginate)).thenReturn(paginatedResponse);
+
+        // When & Then
+        MvcResult mvcResult = mockMvc.perform(get("/category/")
+                        .param("page", String.valueOf(page))
+                        .param("size", String.valueOf(size))
+                        .param("ascendingOrder", String.valueOf(ascendingOrder))
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.totalPages").value(paginatedResponse.getTotalPages()))
+                .andExpect(jsonPath("$.currentPage").value(paginatedResponse.getCurrentPage()))
+                .andExpect(jsonPath("$.totalItems").value(paginatedResponse.getTotalItems()))
+                .andExpect(jsonPath("$.pageSize").value(paginatedResponse.getPageSize()))
+                .andExpect(jsonPath("$.content[0].id").value(categoryList.get(0).getId()))
+                .andExpect(jsonPath("$.content[0].name").value(categoryList.get(0).getName()))
+                .andExpect(jsonPath("$.content[0].description").value(categoryList.get(0).getDescription()))
+                .andExpect(jsonPath("$.content[1].id").value(categoryList.get(1).getId())) // Validación del segundo objeto
+                .andExpect(jsonPath("$.content[1].name").value(categoryList.get(1).getName())) // Validación del segundo objeto
+                .andExpect(jsonPath("$.content[1].description").value(categoryList.get(1).getDescription())) // Validación del segundo objeto
+                .andReturn();
+
+        verify(categoryServicePort).getAllCategories(page, size, ascendingOrder);
     }
 
     @ParameterizedTest
@@ -102,3 +155,4 @@ class CategoryRestControllerAdapterTest {
         return new RequestCase(requestBody, expectedStatus);
     }
 }
+

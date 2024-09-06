@@ -6,8 +6,6 @@ import com.bootcamp_2024_2.api_stock.domain.model.Category;
 import com.bootcamp_2024_2.api_stock.domain.spi.ICategoryPersistencePort;
 import com.bootcamp_2024_2.api_stock.domain.util.Paginate;
 
-import java.util.List;
-
 public class CategoryUseCase implements ICategoryServicePort {
 
     private final ICategoryPersistencePort categoryPersistencePort;
