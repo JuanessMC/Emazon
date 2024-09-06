@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface ICategoryResponseMapper {
+public interface ICategoryResponseMapper extends IGenericResponseMapper<CategoryResponse, Category>{
     CategoryResponse toCategoryResponse(Category category);
     List<CategoryResponse> toCategoryResponseList(List<Category> categories);
 }

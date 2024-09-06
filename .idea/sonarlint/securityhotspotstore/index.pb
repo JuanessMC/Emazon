@@ -33,8 +33,6 @@ asrc/main/java/com/bootcamp_2024_2/api_stock/configuration/exceptionhandler/Cont
 osrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/controller/CategoryRestControllerAdapter.java,c\d\cd7144bc4956b889a8b1dd16d849369fa49800fe
 —
 gsrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driven/jpa/mysql/mapper/ICategoryEntityMapper.java,f\1\f179784e0361a4c8290b8520873b877cd46d047f
-¢
-rsrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driven/jpa/mysql/exception/ElementAlreadyExistsException.java,c\2\c2ddc84a8afdfc37f65a6a2014864c88854d63aa
 <
 build.gradle,f\0\f07866736216be0ee2aba49e392191aeae700a35
 ‡
@@ -77,3 +75,21 @@ Fsrc/test/java/com/bootcamp_2024_2/api_stock/testData/BrandFactory.java,5\e\5e2
 Tsrc/test/java/com/bootcamp_2024_2/api_stock/domain/api/usecase/BrandUseCaseTest.java,2\f\2fa891ab12f485bafb40dc143a6a3af9d33d7d00
  
 psrc/test/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/controller/BrandRestControllerAdapterTest.java,a\3\a30c78acab39a071b7642fc72c86ff730c8ac194
+
+_src/main/java/com/bootcamp_2024_2/api_stock/domain/exception/ElementAlreadyExistsException.java,6\4\64edcd3d3e7efe8a1e6ebe231e64d4cc3fb36e5e
+’
+bsrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/mapper/IBrandResponseMapper.java,6\0\60eaedd3b4c7798fb99bfdfe349174fba6e0ed3e
+‘
+asrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/mapper/IBrandRequestMapper.java,5\5\551c98bb066cb3cc6642f04c716a981d58c8f16a
+‘
+asrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/dto/response/BrandResponse.java,7\8\788cdccce19152cea698e1697390689f6ac9fdd3
+”
+dsrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driven/jpa/mysql/mapper/IBrandEntityMapper.java,d\7\d7c9208f83975f1cf70dd59fc3e8d0dd7078412b
+u
+Esrc/main/java/com/bootcamp_2024_2/api_stock/domain/util/Paginate.java,9\0\90716294795c8adba176cf88d8b51ef49ab4e9ee
+•
+esrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/dto/response/PaginatedResponse.java,a\c\acf7ff868486d6228f821fef0df463954a56838e
+”
+dsrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/mapper/IGenericResponseMapper.java,2\9\29596159cebff79fa4eea6bc5419ac471b02ccae
+z
+Jsrc/test/java/com/bootcamp_2024_2/api_stock/testData/PaginatedFactory.java,f\8\f8b0e1d6e641e580b59862a79bdeb3f48fcfd7b0

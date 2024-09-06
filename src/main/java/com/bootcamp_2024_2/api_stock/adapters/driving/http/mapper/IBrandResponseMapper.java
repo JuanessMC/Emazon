@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface IBrandResponseMapper {
+public interface IBrandResponseMapper extends IGenericResponseMapper<BrandResponse, Brand>{
     BrandResponse toBrandResponse(Brand brand);
     List<BrandResponse> toBrandResponseList(List<Brand> brands);
 

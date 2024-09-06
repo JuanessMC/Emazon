@@ -1,10 +1,10 @@
 package com.bootcamp_2024_2.api_stock.domain.api.usecase;
 
 import com.bootcamp_2024_2.api_stock.domain.api.ICategoryServicePort;
+import com.bootcamp_2024_2.api_stock.domain.exception.ElementAlreadyExistsException;
 import com.bootcamp_2024_2.api_stock.domain.model.Category;
 import com.bootcamp_2024_2.api_stock.domain.spi.ICategoryPersistencePort;
-
-import java.util.List;
+import com.bootcamp_2024_2.api_stock.domain.util.Paginate;
 
 public class CategoryUseCase implements ICategoryServicePort {
 
@@ -15,12 +15,15 @@ public class CategoryUseCase implements ICategoryServicePort {
     }
 
     @Override
-    public void saveCategory(Category category) {
-        categoryPersistencePort.saveCategory(category);
-    }
+    public Category saveCategory(Category category) {
+        if (categoryPersistencePort.existsByName(category.getName())) {
+            throw new ElementAlreadyExistsException(category.getName());
+        }
 
+        return categoryPersistencePort.saveCategory(category);
+    }
     @Override
-    public List<Category> getAllCategories(Integer page, Integer size, boolean ascendingOrder) {
+    public Paginate<Category> getAllCategories(Integer page, Integer size, boolean ascendingOrder) {
         return categoryPersistencePort.getAllCategories(page, size, ascendingOrder);
     }
 }

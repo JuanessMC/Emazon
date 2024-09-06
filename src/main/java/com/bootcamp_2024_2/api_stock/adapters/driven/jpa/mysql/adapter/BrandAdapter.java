@@ -1,13 +1,14 @@
 package com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.adapter;
 
-import com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.exception.ElementAlreadyExistsException;
+import com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.entity.BrandEntity;
 import com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.mapper.IBrandEntityMapper;
 import com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.repository.IBrandRepository;
 import com.bootcamp_2024_2.api_stock.domain.model.Brand;
 import com.bootcamp_2024_2.api_stock.domain.spi.IBrandPersistencePort;
+import com.bootcamp_2024_2.api_stock.domain.util.Paginate;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
 import java.util.List;
@@ -18,17 +19,33 @@ public class BrandAdapter implements IBrandPersistencePort {
     private final IBrandEntityMapper brandEntityMapper;
 
     @Override
-    public void saveBrand(Brand brand) {
-        if (brandRepository.findByName(brand.getName()).isPresent()) {
-            throw new ElementAlreadyExistsException(brand.getName());
-        }
-
+    public Brand saveBrand(Brand brand) {
         brandRepository.save(brandEntityMapper.toEntity(brand));
+
+        return brand;
     }
 
     @Override
-    public List<Brand> getAllBlands(Integer page, Integer size, boolean ascendingOrder) {
-        Pageable pagination = PageRequest.of(page, size, ascendingOrder ? Sort.by("name").ascending() : Sort.by("name").descending());
-        return brandEntityMapper.toModelList(brandRepository.findAll(pagination).getContent());
+    public Paginate<Brand> getAllBrands(Integer page, Integer size, boolean ascendingOrder) {
+        Sort.Direction direction = ascendingOrder ? Sort.Direction.ASC : Sort.Direction.DESC;
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(direction, "name"));
+
+        Page<BrandEntity> brandPage = brandRepository.findAll(pageRequest);
+
+        List<Brand> brands = brandEntityMapper.toModelList(brandPage.getContent());
+
+        return Paginate.of(
+                brandPage.getTotalPages(),
+                brandPage.getNumber(),
+                (int) brandPage.getTotalElements(),
+                brandPage.getSize(),
+                brands
+        );
+    }
+
+
+    @Override
+    public boolean existsByName(String name) {
+        return brandRepository.findByName(name).isPresent();
     }
 }
