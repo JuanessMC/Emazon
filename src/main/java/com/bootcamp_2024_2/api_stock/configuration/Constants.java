@@ -6,4 +6,5 @@ public class Constants {
     }
     public static final String INVALID_FIELD = "invalid field";
     public static final String ELEMENT_ALREADY_EXISTS_EXCEPTION_MESSAGE = "The element with name %s that you want to create already exists";
+    public static final String DUPLICATE_CATEGORY = "Duplicate category IDs found: %S";
 }
