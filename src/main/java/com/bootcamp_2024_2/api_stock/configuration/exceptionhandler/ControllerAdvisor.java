@@ -1,5 +1,6 @@
 package com.bootcamp_2024_2.api_stock.configuration.exceptionhandler;
 
+import com.bootcamp_2024_2.api_stock.domain.exception.DuplicateCategoryException;
 import com.bootcamp_2024_2.api_stock.domain.exception.ElementAlreadyExistsException;
 import com.bootcamp_2024_2.api_stock.configuration.Constants;
 import lombok.RequiredArgsConstructor;
@@ -30,4 +31,11 @@ public class ControllerAdvisor {
                 HttpStatus.BAD_REQUEST.toString(), LocalDateTime.now()));
     }
 
+    @ExceptionHandler(DuplicateCategoryException.class)
+    public ResponseEntity<ExceptionResponse> handleDuplicateCategoryException(DuplicateCategoryException exception) {
+        return ResponseEntity.badRequest().body(new ExceptionResponse(
+                String.format(Constants.DUPLICATE_CATEGORY, exception.getMessage()),
+                HttpStatus.BAD_REQUEST.toString(),
+                LocalDateTime.now()));
+    }
 }
