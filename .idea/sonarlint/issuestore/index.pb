@@ -125,3 +125,5 @@ csrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driven/jpa/mysql/mapper/II
 ksrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/dto/request/AddCategoryByItemRequest.java,8\5\8516935c6aa7926e2bc2966322633e938a7fbe02
 š
 jsrc/main/java/com/bootcamp_2024_2/api_stock/adapters/driving/http/dto/response/CategoryByItemResponse.java,c\1\c147274d0fe4cf8d6d6535121bc6e6ce0587a81f
+’
+bsrc/main/java/com/bootcamp_2024_2/api_stock/domain/exception/InvalidCategoryListSizeException.java,f\2\f2546f12ee2e248336a27e30e5b6a8167df1fb7b

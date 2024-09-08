@@ -3,6 +3,7 @@ package com.bootcamp_2024_2.api_stock.configuration.exceptionhandler;
 import com.bootcamp_2024_2.api_stock.domain.exception.DuplicateCategoryException;
 import com.bootcamp_2024_2.api_stock.domain.exception.ElementAlreadyExistsException;
 import com.bootcamp_2024_2.api_stock.configuration.Constants;
+import com.bootcamp_2024_2.api_stock.domain.exception.InvalidCategoryListSizeException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,5 +38,14 @@ public class ControllerAdvisor {
                 String.format(Constants.DUPLICATE_CATEGORY, exception.getMessage()),
                 HttpStatus.BAD_REQUEST.toString(),
                 LocalDateTime.now()));
+    }
+
+    @ExceptionHandler(InvalidCategoryListSizeException.class)
+    public ResponseEntity<ExceptionResponse> handleInvalidCategoryListSizeException(InvalidCategoryListSizeException exception) {
+        return ResponseEntity.badRequest().body(new ExceptionResponse(
+                String.format(Constants.INVALID_CATEGORY_LIST_SIZE_MESSAGE, Integer.parseInt(exception.getMessage())),
+                HttpStatus.BAD_REQUEST.toString(),
+                LocalDateTime.now()
+        ));
     }
 }

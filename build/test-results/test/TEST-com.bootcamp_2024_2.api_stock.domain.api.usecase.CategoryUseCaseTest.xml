@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-09-07T00:37:46" hostname="JUANES" time="0.114">
+<testsuite name="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2024-09-08T03:22:40" hostname="JUANES" time="0.073">
   <properties/>
-  <testcase name="Given no categories available, it should return an empty paginated result." classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.093"/>
-  <testcase name="whenCategoryDoesNotExist_thenSaveCategory()" classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.004"/>
-  <testcase name="Given valid pagination parameters, it should return a paginated list of categories." classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.004"/>
+  <testcase name="Given no categories available, it should return an empty paginated result." classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.054"/>
+  <testcase name="whenCategoryDoesNotExist_thenSaveCategory()" classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.003"/>
+  <testcase name="Given valid pagination parameters, it should return a paginated list of categories." classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.003"/>
   <testcase name="whenCategoryExists_thenThrowException()" classname="com.bootcamp_2024_2.api_stock.domain.api.usecase.CategoryUseCaseTest" time="0.007"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
