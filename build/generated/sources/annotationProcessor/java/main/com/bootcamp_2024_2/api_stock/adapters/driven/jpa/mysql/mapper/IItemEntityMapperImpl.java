@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-06T19:47:28-0500",
+    date = "2024-09-07T22:22:22-0500",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 @Component
@@ -47,6 +47,7 @@ public class IItemEntityMapperImpl implements IItemEntityMapper {
         }
 
         List<Category> categoriesList = null;
+        Long idBrand = null;
         Long id = null;
         String name = null;
         String description = null;
@@ -54,6 +55,7 @@ public class IItemEntityMapperImpl implements IItemEntityMapper {
         float price = 0.0f;
 
         categoriesList = categoryEntitySetToCategoryList( itemEntity.getCategoriesList() );
+        idBrand = itemEntityBrandId( itemEntity );
         id = itemEntity.getId();
         name = itemEntity.getName();
         description = itemEntity.getDescription();
@@ -61,8 +63,6 @@ public class IItemEntityMapperImpl implements IItemEntityMapper {
         if ( itemEntity.getPrice() != null ) {
             price = itemEntity.getPrice().floatValue();
         }
-
-        Long idBrand = null;
 
         Item item = new Item( id, name, description, quantity, price, idBrand, categoriesList );
 
@@ -151,5 +151,20 @@ public class IItemEntityMapperImpl implements IItemEntityMapper {
         }
 
         return list;
+    }
+
+    private Long itemEntityBrandId(ItemEntity itemEntity) {
+        if ( itemEntity == null ) {
+            return null;
+        }
+        BrandEntity brand = itemEntity.getBrand();
+        if ( brand == null ) {
+            return null;
+        }
+        Long id = brand.getId();
+        if ( id == null ) {
+            return null;
+        }
+        return id;
     }
 }

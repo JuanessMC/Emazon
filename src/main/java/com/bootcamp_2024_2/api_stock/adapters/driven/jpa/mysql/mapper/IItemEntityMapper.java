@@ -13,6 +13,7 @@ public interface IItemEntityMapper {
     @Mapping(source = "idBrand", target = "brand.id")
     ItemEntity toEntity(Item item);
     @Mapping(source = "categoriesList", target = "categoriesList")
+    @Mapping(source = "brand.id", target = "idBrand")
     Item toModel(ItemEntity itemEntity);
 
     List<Item> toModelList(List<ItemEntity> itemEntities);
