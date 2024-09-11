@@ -8,16 +8,16 @@ public class Item {
     private final String description;
     private final int quantity;
     private final float price;
-    private final Long idBrand;
+    private Brand brand;
     private List<Category> categoriesList;
 
-    public Item(Long id, String name, String description, int quantity, float price, Long idBrand, List<Category> categoriesList) {
+    public Item(Long id, String name, String description, int quantity, float price, Brand brand, List<Category> categoriesList) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.quantity = quantity;
         this.price = price;
-        this.idBrand = idBrand;
+        this.brand = brand;
         this.categoriesList = categoriesList;
     }
 
@@ -41,8 +41,12 @@ public class Item {
         return price;
     }
 
-    public Long getIdBrand() {
-        return idBrand;
+    public Brand getBrand() {
+        return brand;
+    }
+
+    public void setBrand(Brand brand) {
+        this.brand = brand;
     }
 
     public List<Category> getCategoriesList() {
