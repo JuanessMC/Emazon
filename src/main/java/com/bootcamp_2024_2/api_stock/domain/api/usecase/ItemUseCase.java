@@ -6,16 +6,17 @@ import com.bootcamp_2024_2.api_stock.domain.exception.InvalidCategoryListSizeExc
 import com.bootcamp_2024_2.api_stock.domain.model.Category;
 import com.bootcamp_2024_2.api_stock.domain.model.Item;
 import com.bootcamp_2024_2.api_stock.domain.spi.IItemPersistencePort;
+import com.bootcamp_2024_2.api_stock.domain.util.Paginate;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ItemUseCase implements IItemServicePort {
 
-    private final IItemPersistencePort iItemPersistencePort;
+    private final IItemPersistencePort itemPersistencePort;
 
-    public ItemUseCase(IItemPersistencePort iItemPersistencePort) {
-        this.iItemPersistencePort = iItemPersistencePort;
+    public ItemUseCase(IItemPersistencePort itemPersistencePort) {
+        this.itemPersistencePort = itemPersistencePort;
     }
 
     @Override
@@ -23,7 +24,12 @@ public class ItemUseCase implements IItemServicePort {
         validateCategoryListSize(item.getCategoriesList());
         validateUniqueCategories(item.getCategoriesList());
 
-        return iItemPersistencePort.saveItem(item);
+        return itemPersistencePort.saveItem(item);
+    }
+
+    @Override
+    public Paginate<Item> getAllItems(Integer page, Integer size, boolean ascendingOrder, String order) {
+        return itemPersistencePort.getAllItems(page, size, ascendingOrder, order);
     }
 
     private void validateCategoryListSize(List<Category> categoriesList) {

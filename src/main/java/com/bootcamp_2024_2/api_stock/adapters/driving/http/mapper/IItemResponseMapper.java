@@ -8,8 +8,10 @@ import org.mapstruct.Mapping;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface IItemResponseMapper {
+public interface IItemResponseMapper extends IGenericResponseMapper<ItemResponse, Item>{
     @Mapping(source = "categoriesList", target = "categoriesList")
+    @Mapping(source = "brand.id", target = "idBrand")
+    @Mapping(source = "brand.name", target = "brandName")
     ItemResponse toItemResponse(Item item);
 
     List<ItemResponse> toItemResponseList(List<Item> items);

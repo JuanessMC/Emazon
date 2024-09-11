@@ -3,6 +3,7 @@ package com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.mapper;
 import com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.entity.BrandEntity;
 import com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.entity.CategoryEntity;
 import com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.entity.ItemEntity;
+import com.bootcamp_2024_2.api_stock.domain.model.Brand;
 import com.bootcamp_2024_2.api_stock.domain.model.Category;
 import com.bootcamp_2024_2.api_stock.domain.model.Item;
 import java.math.BigDecimal;
@@ -15,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-09-07T22:22:22-0500",
+    date = "2024-09-10T22:03:40-0500",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 @Component
@@ -29,7 +30,7 @@ public class IItemEntityMapperImpl implements IItemEntityMapper {
 
         ItemEntity itemEntity = new ItemEntity();
 
-        itemEntity.setBrand( itemToBrandEntity( item ) );
+        itemEntity.setBrand( brandToBrandEntity( item.getBrand() ) );
         itemEntity.setCategoriesList( categoryListToCategoryEntitySet( item.getCategoriesList() ) );
         itemEntity.setId( item.getId() );
         itemEntity.setName( item.getName() );
@@ -46,16 +47,16 @@ public class IItemEntityMapperImpl implements IItemEntityMapper {
             return null;
         }
 
+        Brand brand = null;
         List<Category> categoriesList = null;
-        Long idBrand = null;
         Long id = null;
         String name = null;
         String description = null;
         int quantity = 0;
         float price = 0.0f;
 
+        brand = brandEntityToBrand( itemEntity.getBrand() );
         categoriesList = categoryEntitySetToCategoryList( itemEntity.getCategoriesList() );
-        idBrand = itemEntityBrandId( itemEntity );
         id = itemEntity.getId();
         name = itemEntity.getName();
         description = itemEntity.getDescription();
@@ -64,7 +65,7 @@ public class IItemEntityMapperImpl implements IItemEntityMapper {
             price = itemEntity.getPrice().floatValue();
         }
 
-        Item item = new Item( id, name, description, quantity, price, idBrand, categoriesList );
+        Item item = new Item( id, name, description, quantity, price, brand, categoriesList );
 
         return item;
     }
@@ -83,14 +84,16 @@ public class IItemEntityMapperImpl implements IItemEntityMapper {
         return list;
     }
 
-    protected BrandEntity itemToBrandEntity(Item item) {
-        if ( item == null ) {
+    protected BrandEntity brandToBrandEntity(Brand brand) {
+        if ( brand == null ) {
             return null;
         }
 
         BrandEntity brandEntity = new BrandEntity();
 
-        brandEntity.setId( item.getIdBrand() );
+        brandEntity.setId( brand.getId() );
+        brandEntity.setName( brand.getName() );
+        brandEntity.setDescription( brand.getDescription() );
 
         return brandEntity;
     }
@@ -122,6 +125,24 @@ public class IItemEntityMapperImpl implements IItemEntityMapper {
         return set;
     }
 
+    protected Brand brandEntityToBrand(BrandEntity brandEntity) {
+        if ( brandEntity == null ) {
+            return null;
+        }
+
+        Long id = null;
+        String name = null;
+        String description = null;
+
+        id = brandEntity.getId();
+        name = brandEntity.getName();
+        description = brandEntity.getDescription();
+
+        Brand brand = new Brand( id, name, description );
+
+        return brand;
+    }
+
     protected Category categoryEntityToCategory(CategoryEntity categoryEntity) {
         if ( categoryEntity == null ) {
             return null;
@@ -151,20 +172,5 @@ public class IItemEntityMapperImpl implements IItemEntityMapper {
         }
 
         return list;
-    }
-
-    private Long itemEntityBrandId(ItemEntity itemEntity) {
-        if ( itemEntity == null ) {
-            return null;
-        }
-        BrandEntity brand = itemEntity.getBrand();
-        if ( brand == null ) {
-            return null;
-        }
-        Long id = brand.getId();
-        if ( id == null ) {
-            return null;
-        }
-        return id;
     }
 }

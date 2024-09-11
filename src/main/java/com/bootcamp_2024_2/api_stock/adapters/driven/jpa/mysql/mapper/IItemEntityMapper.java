@@ -10,10 +10,11 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface IItemEntityMapper {
     @Mapping(source = "categoriesList", target = "categoriesList")
-    @Mapping(source = "idBrand", target = "brand.id")
+    @Mapping(source = "brand.id", target = "brand.id")
     ItemEntity toEntity(Item item);
     @Mapping(source = "categoriesList", target = "categoriesList")
-    @Mapping(source = "brand.id", target = "idBrand")
+    @Mapping(source = "brand.id", target = "brand.id")
+    @Mapping(source = "brand.name", target = "brand.name")
     Item toModel(ItemEntity itemEntity);
 
     List<Item> toModelList(List<ItemEntity> itemEntities);

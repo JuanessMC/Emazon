@@ -9,5 +9,6 @@ import org.mapstruct.Mapping;
 public interface IItemRequestMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "categoriesList", source = "categoriesIdList")
+    @Mapping(target = "brand.id", source = "idBrand")
     Item addRequestToItem(AddItemRequest addItemRequest);
 }
