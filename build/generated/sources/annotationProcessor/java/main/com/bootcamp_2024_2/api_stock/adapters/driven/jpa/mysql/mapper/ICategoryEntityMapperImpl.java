@@ -2,12 +2,14 @@ package com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.mapper;
 
 import com.bootcamp_2024_2.api_stock.adapters.driven.jpa.mysql.entity.CategoryEntity;
 import com.bootcamp_2024_2.api_stock.domain.model.Category;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2024-08-18T17:34:28-0500",
+    date = "2024-09-10T22:03:40-0500",
     comments = "version: 1.5.5.Final, compiler: IncrementalProcessingEnvironment from gradle-language-java-8.8.jar, environment: Java 17.0.10 (Amazon.com Inc.)"
 )
 @Component
@@ -45,5 +47,19 @@ public class ICategoryEntityMapperImpl implements ICategoryEntityMapper {
         categoryEntity.setDescription( category.getDescription() );
 
         return categoryEntity;
+    }
+
+    @Override
+    public List<Category> toModelList(List<CategoryEntity> categoryEntities) {
+        if ( categoryEntities == null ) {
+            return null;
+        }
+
+        List<Category> list = new ArrayList<Category>( categoryEntities.size() );
+        for ( CategoryEntity categoryEntity : categoryEntities ) {
+            list.add( toModel( categoryEntity ) );
+        }
+
+        return list;
     }
 }
